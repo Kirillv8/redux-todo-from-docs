@@ -1,18 +1,23 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
 import tsconfigPaths from 'vite-tsconfig-paths';
-// https://vite.dev/config/
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// ESM-compatible __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   resolve: {
     alias: {
-      '@app': path.resolve(__dirname, 'src/app'),
-      '@shared': path.resolve(__dirname, 'src/shared'),
-      '@entities': path.resolve(__dirname, 'src/entities'),
-      '@features': path.resolve(__dirname, 'src/features'),
-      '@widgets': path.resolve(__dirname, 'src/widgets'),
-      '@pages': path.resolve(__dirname, 'src/pages'),
+      '@app': `${__dirname}/src/app`,
+      '@shared': `${__dirname}/src/shared`,
+      '@entities': `${__dirname}/src/entities`,
+      '@features': `${__dirname}/src/features`,
+      '@widgets': `${__dirname}/src/widgets`,
+      '@pages': `${__dirname}/src/pages`,
     },
   },
 });
